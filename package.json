@@ -18,6 +18,8 @@
     "hardhat": "^2.10.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.1"
+    "@rainbow-me/rainbowkit": "^0.4.2",
+    "dotenv": "^16.0.1",
+    "wagmi": "^0.5.9"
   }
 }

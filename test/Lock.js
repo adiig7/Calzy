@@ -1,7 +1,11 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Set Rate", function () {
+describe("Calzy", function () {
+  // let Contract, contract;
+  // let owner, addr1, addr2;
+
+  // beforeEach(async function ()
   it("Should set the minutely rate", async function () {
     const Contract = await ethers.getContractFactory("Calzy");
     const contract = await Contract.deploy();
@@ -19,5 +23,9 @@ describe("Set Rate", function () {
     await expect(
       contract.connect(addr1).setRate(500)
     ).to.be.revertedWith('Only owner can set the rate')
+  });
+
+  it("Should create a appointment",async function{
+
   })
 })

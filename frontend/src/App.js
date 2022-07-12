@@ -43,7 +43,7 @@ function App() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <ConnectButton />
+        <ConnectButton showBalance={false} />
       </RainbowKitProvider>
     </WagmiConfig>
    
