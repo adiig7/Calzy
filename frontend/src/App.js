@@ -45,22 +45,22 @@ function App() {
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
-      // if (!ethereum) {
-      //   console.log("Metamask not found");
-      //   return;
-      // }
-      // let chainId = await ethereum.request({ method: 'eth_chainId' });
-      // console.log('Connected to chain: ' + chainId);
+      if (!ethereum) {
+        console.log("Metamask not found");
+        return;
+      }
+      let chainId = await ethereum.request({ method: 'eth_chainId' });
+      console.log('Connected to chain: ' + chainId);
 
-      // const rinkebyChainId = '0x4';
+      const rinkebyChainId = '0x4';
 
-      // if (chainId !== rinkebyChainId) {
-      //   alert('You are not connected to the Rinkeby Testnet!');
-      //   setCorrectNetwork(false);
-      //   return;
-      // } else {
-      //   setCorrectNetwork(true);
-      // }
+      if (chainId !== rinkebyChainId) {
+        alert('You are not connected to the Rinkeby Testnet!');
+        setCorrectNetwork(false);
+        return;
+      } else {
+        setCorrectNetwork(true);
+      }
 
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
@@ -79,7 +79,7 @@ function App() {
       <RainbowKitProvider chains={chains}>
         <ConnectButton showBalance={false} />
         <div className="main">
-
+          <Calendar />
         </div>
       </RainbowKitProvider>
     </WagmiConfig>

@@ -3,7 +3,7 @@ pragma solidity ^0.8.10;
 
 contract Calzy{
     uint rate;
-    address owner;
+    address payable owner;
 
     struct Appointment{
         string title;
@@ -16,7 +16,7 @@ contract Calzy{
     Appointment[] appointments;
 
     constructor(){
-        owner = msg.sender;
+        owner = payable(msg.sender);
     }
 
     function getRate() public view returns(uint){
@@ -32,12 +32,17 @@ contract Calzy{
         return appointments;
     }
 
-    function addAppointment(string memory title, uint startTime, uint endTime) public{
+    function addAppointment(string memory title, uint startTime, uint endTime) public payable{
         Appointment memory appointment;
         appointment.title = title;
         appointment.startTime = startTime;
         appointment.endTime = endTime;
         appointment.amountPaid = ((endTime-startTime)/60)*rate;
+
+        require(msg.value >= appointment.amountPaid, "Please enter an appropritate amount :)");
+
+        (bool success, ) = owner.call{value: msg.value}("");
+        require(success, "Failed to send Ether");
 
         appointments.push(appointment);
     }
